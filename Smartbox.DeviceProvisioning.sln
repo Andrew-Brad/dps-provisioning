@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartbox.DeviceProvisioning.API", "Smartbox.DeviceProvisioning.API\Smartbox.DeviceProvisioning.API.csproj", "{1FF58BFE-2C3F-4069-A9E3-4858BAA80A4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FF58BFE-2C3F-4069-A9E3-4858BAA80A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF58BFE-2C3F-4069-A9E3-4858BAA80A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF58BFE-2C3F-4069-A9E3-4858BAA80A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF58BFE-2C3F-4069-A9E3-4858BAA80A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A49E44A-2530-4467-8D93-582D3155AA3E}
+	EndGlobalSection
+EndGlobal
