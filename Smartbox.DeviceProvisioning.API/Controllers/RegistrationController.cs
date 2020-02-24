@@ -15,9 +15,9 @@ namespace Smartbox.DeviceProvisioning.API.Controllers
 
         public RegistrationController(IConfiguration configuration)
         {
-            var certificateManager = new CertificateManager(configuration);
+            var deviceManager = new DeviceManager(configuration);
 
-            this.deviceProvisioningService = new DeviceProvisioningService(configuration, certificateManager);
+            this.deviceProvisioningService = new DeviceProvisioningService(configuration, deviceManager);
             this.configuration = configuration;
         }
 
@@ -32,7 +32,9 @@ namespace Smartbox.DeviceProvisioning.API.Controllers
         [HttpPost]
         public DeviceRegistrationResult RegisterDevice([FromBody] Registration registration)
         {
-            return deviceProvisioningService.RegisterDevice(registration.DeviceId, registration.Password);
+            var registrationResult = deviceProvisioningService.RegisterDevice(registration.DeviceId, registration.Password);
+
+            return registrationResult;
         }
     }
 }

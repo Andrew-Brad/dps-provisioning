@@ -15,21 +15,21 @@ namespace Smartbox.DeviceProvisioning.API
     public class DeviceProvisioningService : IDeviceProvisioningService
     {
         private readonly IConfiguration configuration;
-        private readonly ICertificateManager certificateManager;
+        private readonly IDeviceManager deviceManager;
 
-        public DeviceProvisioningService(IConfiguration configuration, ICertificateManager certificateManager)
+        public DeviceProvisioningService(IConfiguration configuration, IDeviceManager deviceManager)
         {
             this.configuration = configuration;
-            this.certificateManager = certificateManager;
+            this.deviceManager = deviceManager;
         }
 
         public IndividualEnrollment EnrollDevice(string deviceId, string password)
         {
-            var cert = certificateManager.GenerateCertificate(deviceId);
+            var cert = deviceManager.GenerateCertificate(deviceId);
 
-            certificateManager.SaveCertificates(cert, deviceId, password);
+            deviceManager.SaveCertificates(cert, deviceId, password);
 
-            var publicCert = certificateManager.ReadPublicCertificate(deviceId);
+            var publicCert = deviceManager.ReadPublicCertificate(deviceId);
 
             var attestation = X509Attestation.CreateFromClientCertificates(publicCert);
             var individualEnrollment = new IndividualEnrollment($"{deviceId}", attestation)
@@ -49,7 +49,7 @@ namespace Smartbox.DeviceProvisioning.API
 
         public DeviceRegistrationResult RegisterDevice(string deviceId, string password)
         {
-            var cert = certificateManager.ReadPrivateCertificate(deviceId, password);
+            var cert = deviceManager.ReadPrivateCertificate(deviceId, password);
 
             using (var security = new SecurityProviderX509Certificate(cert))
             {
@@ -59,6 +59,14 @@ namespace Smartbox.DeviceProvisioning.API
                         ProvisioningDeviceClient.Create(configuration.GetValue<string>("DeviceProvisioningEndpoint"), configuration.GetValue<string>("DeviceProvisioningScope"), security, transport);
 
                     var result = provClient.RegisterAsync().GetAwaiter().GetResult();
+
+                    deviceManager.SaveRegistration(new Models.RegistrationInfo
+                    {
+                        AssignedHub = result.AssignedHub,
+                        DeviceId = result.DeviceId,
+                        RegistrationId = result.RegistrationId
+                    });
+                    deviceManager.SavePassword(deviceId, password);
 
                     return result;
                 }
