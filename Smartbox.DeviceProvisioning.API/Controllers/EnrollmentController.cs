@@ -15,7 +15,9 @@ namespace Smartbox.DeviceProvisioning.API.Controllers
 
         public EnrollmentController(IConfiguration configuration)
         {
-            this.deviceProvisioningService = new DeviceProvisioningService(configuration);
+            var certificateManager = new CertificateManager(configuration);
+
+            this.deviceProvisioningService = new DeviceProvisioningService(configuration, certificateManager);
             this.configuration = configuration;
         }
 
