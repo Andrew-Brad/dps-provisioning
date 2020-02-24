@@ -25,7 +25,7 @@ namespace Smartbox.DeviceProvisioning.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { configuration.GetValue<string>("DeviceProvisioningEndpoint"), configuration.GetValue<string>("DeviceProvisioningScope") };
+            return new string[] { "Use POST api/Enrollment to enroll a device." };
         }
 
         // POST: api/Enrollment

@@ -21,7 +21,7 @@ namespace Smartbox.DeviceProvisioning.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Use POST api/Message to send a message from a device to the IOT Hub." };
         }
 
         // POST: api/Message

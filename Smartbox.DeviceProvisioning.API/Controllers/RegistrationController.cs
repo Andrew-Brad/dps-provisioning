@@ -25,7 +25,7 @@ namespace Smartbox.DeviceProvisioning.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Use POST api/Registration to register/provision an  enrolled device." };
         }
 
         // POST: api/Registration
